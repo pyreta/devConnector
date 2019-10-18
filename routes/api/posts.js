@@ -6,9 +6,9 @@ const Profile = require('../../models/Profile');
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
-// @route   GET api/posts
-// @desc    Test route
-// @access  Public
+// @route   POST api/posts
+// @desc    make post
+// @access  Private
 const postsValidation = [
   check('text', 'Text is required')
     .not()
@@ -32,6 +32,56 @@ router.post('/', [auth, postsValidation], async (req, res) => {
     await post.save();
     res.json(post);
   } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   GET api/posts
+// @desc    Get all posts
+// @access  Private
+
+router.get('/', auth, async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ date: -1 });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   GET api/posts/:id
+// @desc    Get post by id
+// @access  Private
+
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).json({ msg: 'Post not found!' });
+    res.json(post);
+  } catch (err) {
+    if (err.kind === 'ObjectId') return res.status(404).json({ msg: 'Post not found!' });
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   DELETE api/posts/:id
+// @desc    Delete a post
+// @access  Private
+
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).json({ msg: 'Post not found!' });
+    if (post.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+    await post.remove();
+    res.json({ msg: 'Post removed' });
+  } catch (err) {
+    if (err.kind === 'ObjectId') return res.status(404).json({ msg: 'Post not found!' });
     console.error(err.message);
     res.status(500).send('Server error');
   }
