@@ -5,6 +5,10 @@ import createActionsAndTypes from './createActionsAndTypes';
     'REMOVE_ALERT',
     'REGISTER_SUCCESS',
     'REGISTER_FAIL',
+    'USER_LOADED',
+    'AUTH_ERROR',
+    'LOGIN_SUCCESS',
+    'LOGIN_FAIL',
   ]);
   
   export default actions;
