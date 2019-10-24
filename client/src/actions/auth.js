@@ -45,3 +45,8 @@ export const login = (email, password) => async dispatch => {
     dispatch(actions.LOGIN_FAIL(errors));
   }
 };
+
+// Log out User
+export const logout = () => dispatch => {
+  dispatch(actions.LOGOUT());
+};

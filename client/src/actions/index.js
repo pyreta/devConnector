@@ -9,6 +9,7 @@ import createActionsAndTypes from './createActionsAndTypes';
     'AUTH_ERROR',
     'LOGIN_SUCCESS',
     'LOGIN_FAIL',
+    'LOGOUT',
   ]);
   
   export default actions;

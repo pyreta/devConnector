@@ -8,7 +8,7 @@ const initialState = {
   user: null,
 };
 
-const handleFail = authState => {
+const clearToken = authState => {
   localStorage.removeItem('token');
   return {
     ...authState,
@@ -18,7 +18,7 @@ const handleFail = authState => {
   };
 };
 
-const handleSuccess = (authState, { payload }) => {
+const setToken = (authState, { payload }) => {
   localStorage.setItem('token', payload.token);
   return {
     ...authState,
@@ -30,10 +30,11 @@ const handleSuccess = (authState, { payload }) => {
 
 export default handleActions(
   {
-    [actionTypes.REGISTER_SUCCESS]: handleSuccess,
-    [actionTypes.LOGIN_SUCCESS]: handleSuccess,
-    [actionTypes.REGISTER_FAIL]: handleFail,
-    [actionTypes.LOGIN_FAIL]: handleFail,
+    [actionTypes.REGISTER_SUCCESS]: setToken,
+    [actionTypes.LOGIN_SUCCESS]: setToken,
+    [actionTypes.REGISTER_FAIL]: clearToken,
+    [actionTypes.LOGIN_FAIL]: clearToken,
+    [actionTypes.LOGOUT]: clearToken,
     [actionTypes.USER_LOADED]: (authState, { payload: user }) => {
       return {
         ...authState,
@@ -42,7 +43,7 @@ export default handleActions(
         user,
       };
     },
-    [actionTypes.AUTH_ERROR]: handleFail,
+    [actionTypes.AUTH_ERROR]: clearToken,
   },
   initialState
 );
