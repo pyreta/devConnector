@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import { setAlert } from './alert';
+import { setAlert } from './alert';
 import actions from '.';
 
 // Get current users profile
@@ -9,6 +9,22 @@ export const getCurrentProfile = () => async dispatch => {
     dispatch(actions.GET_PROFILE(res.data));
   } catch (err) {
       console.log('err', err);
+      
+    dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
+  }
+};
+
+// Create or update a profile
+export const createProfile = (formData, history, edit) => async dispatch => {
+  try {
+    const config = { headers: { 'Content-Type': 'application/json' } };
+    const res = await axios.post('/api/profile', formData, config);
+    dispatch(actions.GET_PROFILE(res.data));
+    dispatch(setAlert(edit ? 'Profile updated!' : 'Profile Created!', 'success'));
+    if (!edit) history.push('/dashboard');
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
       
     dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
   }
