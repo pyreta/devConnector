@@ -13,7 +13,7 @@ export default handleActions(
   {
     [actionTypes.GET_PROFILE]: (profileState, { payload }) => ({
       ...profileState,
-      profile: payload,
+      profile: payload.profile,
       loading: false,
     }),
     [actionTypes.PROFILE_ERROR]: (profileState, { payload }) => ({
