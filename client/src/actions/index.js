@@ -10,6 +10,9 @@ import createActionsAndTypes from './createActionsAndTypes';
     'LOGIN_SUCCESS',
     'LOGIN_FAIL',
     'LOGOUT',
+    'GET_PROFILE',
+    'PROFILE_ERROR',
+    'CLEAR_PROFILE',
   ]);
   
   export default actions;
