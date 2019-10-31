@@ -35,6 +35,7 @@ export default handleActions(
     [actionTypes.REGISTER_FAIL]: clearToken,
     [actionTypes.LOGIN_FAIL]: clearToken,
     [actionTypes.LOGOUT]: clearToken,
+    [actionTypes.ACCOUNT_DELETED]: clearToken,
     [actionTypes.USER_LOADED]: (authState, { payload: user }) => {
       return {
         ...authState,

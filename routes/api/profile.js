@@ -4,6 +4,7 @@ const config = require('config');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
+const Post = require('../../models/Post');
 const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
 
@@ -143,7 +144,8 @@ router.get('/user/:user_id', async (req, res) => {
 
 router.delete('/', auth, async (req, res) => {
   try {
-    // @ todo - remove users posts
+    // remove users posts
+    await Post.deleteMany({ user: req.user.id });
     // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
@@ -200,7 +202,7 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
     const removeIndex = profile.experience.map(item => item.id).indexOf(req.params.exp_id);
     profile.experience.splice(removeIndex, 1);
     await profile.save();
-    res.json(profile);
+    res.json({ profile });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -256,7 +258,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
     const removeIndex = profile.education.map(item => item.id).indexOf(req.params.edu_id);
     profile.education.splice(removeIndex, 1);
     await profile.save();
-    res.json(profile);
+    res.json({ profile });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

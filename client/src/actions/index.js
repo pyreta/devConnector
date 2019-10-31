@@ -14,6 +14,7 @@ import createActionsAndTypes from './createActionsAndTypes';
     'PROFILE_ERROR',
     'CLEAR_PROFILE',
     'UPDATE_PROFILE',
+    'ACCOUNT_DELETED',
   ]);
   
   export default actions;
