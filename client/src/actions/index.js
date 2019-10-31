@@ -13,6 +13,7 @@ import createActionsAndTypes from './createActionsAndTypes';
     'GET_PROFILE',
     'PROFILE_ERROR',
     'CLEAR_PROFILE',
+    'UPDATE_PROFILE',
   ]);
   
   export default actions;

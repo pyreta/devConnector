@@ -9,13 +9,16 @@ const initialState = {
   error: {},
 };
 
+const setProfile = (profileState, { payload }) => ({
+  ...profileState,
+  profile: payload.profile,
+  loading: false,
+});
+
 export default handleActions(
   {
-    [actionTypes.GET_PROFILE]: (profileState, { payload }) => ({
-      ...profileState,
-      profile: payload.profile,
-      loading: false,
-    }),
+    [actionTypes.GET_PROFILE]: setProfile,
+    [actionTypes.UPDATE_PROFILE]: setProfile,
     [actionTypes.PROFILE_ERROR]: (profileState, { payload }) => ({
       ...profileState,
       error: payload,
