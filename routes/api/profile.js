@@ -90,11 +90,11 @@ router.post('/', [auth, profileValidations], async (req, res) => {
         { $set: profileFields },
         { new: true }
       );
-      return res.json(profile);
+      return res.json({ profile });
     }
     profile = new Profile(profileFields);
     await profile.save();
-    return res.json(profile);
+    return res.json({ profile });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -128,7 +128,7 @@ router.get('/user/:user_id', async (req, res) => {
     if (!profile) {
       return res.status(400).json({ msg: 'Profile not found' });
     }
-    res.json(profile);
+    res.json({ profile });
   } catch (err) {
     console.error(err.message);
     if (err.kind == 'ObjectId') {
