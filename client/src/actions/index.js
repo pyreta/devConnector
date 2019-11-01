@@ -11,6 +11,8 @@ import createActionsAndTypes from './createActionsAndTypes';
     'LOGIN_FAIL',
     'LOGOUT',
     'GET_PROFILE',
+    'GET_PROFILES',
+    'GET_REPOS',
     'PROFILE_ERROR',
     'CLEAR_PROFILE',
     'UPDATE_PROFILE',

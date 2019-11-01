@@ -18,6 +18,16 @@ const setProfile = (profileState, { payload }) => ({
 export default handleActions(
   {
     [actionTypes.GET_PROFILE]: setProfile,
+    [actionTypes.GET_PROFILES]: (profileState, { payload }) => ({
+      ...profileState,
+      profiles: payload,
+      loading: false,
+    }),
+    [actionTypes.GET_REPOS]: (profileState, { payload }) => ({
+      ...profileState,
+      repos: payload,
+      loading: false,
+    }),
     [actionTypes.UPDATE_PROFILE]: setProfile,
     [actionTypes.PROFILE_ERROR]: (profileState, { payload }) => ({
       ...profileState,

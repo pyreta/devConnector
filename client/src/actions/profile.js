@@ -8,7 +8,45 @@ export const getCurrentProfile = () => async dispatch => {
     const res = await axios.get('/api/profile/me');
     dispatch(actions.GET_PROFILE(res.data));
   } catch (err) {
-      console.log('err', err);
+      console.error('err', err);
+      
+    dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
+  }
+};
+
+// Get all profiles
+export const getProfiles = () => async dispatch => {
+  dispatch(actions.CLEAR_PROFILE())
+  try {
+    const res = await axios.get('/api/profile');
+    dispatch(actions.GET_PROFILES(res.data));
+  } catch (err) {
+      console.error('err', err);
+      
+    dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
+  }
+};
+
+// Get all profile by id
+export const getProfileById = userId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/profile/user/${userId}`);
+    dispatch(actions.GET_PROFILE(res.data));
+  } catch (err) {
+      console.error('err', err);
+      
+    dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
+  }
+};
+
+
+// Get github repos
+export const getGithubRepos = username => async dispatch => {
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`);
+    dispatch(actions.GET_REPOS(res.data));
+  } catch (err) {
+      console.error('err', err);
       
     dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
   }
