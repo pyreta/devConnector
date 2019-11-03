@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
+import ProfileGithub from './ProfileGithub';
 import ProfileEducation from './ProfileEducation';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
@@ -52,6 +53,7 @@ const Profile = ({ getProfileById, match, profile: { profile, loading }, auth })
             <h4>No Education</h4>
           )}
         </div>
+        {profile.githubusername && <ProfileGithub username={profile.githubusername} /> }
       </div>
     </Fragment>
   );
