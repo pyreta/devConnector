@@ -19,6 +19,7 @@ import createActionsAndTypes from './createActionsAndTypes';
     'ACCOUNT_DELETED',
     'GET_POSTS',
     'POST_ERROR',
+    'UPDATE_LIKES',
   ]);
   
   export default actions;

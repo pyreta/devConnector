@@ -24,6 +24,15 @@ export default handleActions(
         loading: false,
       };
     },
+    [actionTypes.UPDATE_LIKES]: (postsState, { payload }) => {
+      return {
+        ...postsState,
+        posts: postsState.posts.map(post =>
+          post._id === payload.id ? { ...post, likes: payload.likes } : post
+        ),
+        loading: false,
+      };
+    },
   },
   initialState
 );
