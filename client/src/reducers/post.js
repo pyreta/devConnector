@@ -17,6 +17,20 @@ export default handleActions(
         loading: false,
       };
     },
+    [actionTypes.GET_POST]: (postsState, { payload }) => {
+      return {
+        ...postsState,
+        post: payload,
+        loading: false,
+      };
+    },
+    [actionTypes.ADD_POST]: (postsState, { payload }) => {
+      return {
+        ...postsState,
+        posts: [payload, ...postsState.posts],
+        loading: false,
+      };
+    },
     [actionTypes.DELETE_POST]: (postsState, { payload }) => {
       return {
         ...postsState,
