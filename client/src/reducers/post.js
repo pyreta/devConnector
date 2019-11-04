@@ -17,6 +17,13 @@ export default handleActions(
         loading: false,
       };
     },
+    [actionTypes.DELETE_POST]: (postsState, { payload }) => {
+      return {
+        ...postsState,
+        posts: postsState.posts.filter(post => post._id !== payload),
+        loading: false,
+      };
+    },
     [actionTypes.POST_ERROR]: (postsState, { payload }) => {
       return {
         ...postsState,

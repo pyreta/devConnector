@@ -11,6 +11,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to="/profiles">Developers</Link>
       </li>
       <li>
+        <Link to="/posts">Posts</Link>
+      </li>
+      <li>
         <Link to="/dashboard">
           <span className="hide-sm">
             {' '}
@@ -46,9 +49,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <i className="fas fa-code"></i> DevConnector
         </Link>
       </h1>
-        <Link to="/posts">
-          Posts
-        </Link>
       {!loading && (isAuthenticated ? authLinks : guestLinks)}
     </nav>
   );
