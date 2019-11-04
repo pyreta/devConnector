@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://pyreta:pyretaMERNpassword@devconnector-nfgu3.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mysupersecret",
+    "githubClientId": "2c301bce8e169b814fed",
+    "githubSecret": "eca501648b3ca4320fa7f9b172c7c6a6c3afd082"
+}
