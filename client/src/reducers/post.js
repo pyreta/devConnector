@@ -54,6 +54,20 @@ export default handleActions(
         loading: false,
       };
     },
+    [actionTypes.ADD_COMMENT]: (postsState, { payload }) => {
+      return {
+        ...postsState,
+        post: { ...postsState.post, comments: payload },
+        loading: false,
+      };
+    },
+    [actionTypes.REMOVE_COMMENT]: (postsState, { payload }) => {
+      return {
+        ...postsState,
+        post: { ...postsState.post, comments: postsState.post.comments.filter(comment => comment._id !== payload) },
+        loading: false,
+      };
+    },
   },
   initialState
 );

@@ -23,6 +23,8 @@ import createActionsAndTypes from './createActionsAndTypes';
     'UPDATE_LIKES',
     'DELETE_POST',
     'ADD_POST',
+    'ADD_COMMENT',
+    'REMOVE_COMMENT',
   ]);
   
   export default actions;

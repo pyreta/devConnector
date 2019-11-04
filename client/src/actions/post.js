@@ -70,3 +70,28 @@ export const getPost = id => async dispatch => {
     dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
   }
 };
+
+// Add Comment
+export const addComment = (postId, formData) => async dispatch => {
+  try {
+    const config = { headers: { 'Content-Type': 'application/json' } };
+    const res = await axios.post(`/api/posts/comment/${postId}`, formData, config);
+    dispatch(actions.ADD_COMMENT(res.data));
+    dispatch(setAlert('Comment Added', 'success'));
+  } catch (err) {
+    console.error('err', err);
+    dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
+  }
+};
+
+// Delete Comment
+export const deleteComment = (postId, commentId) => async dispatch => {
+  try {
+    await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+    dispatch(actions.REMOVE_COMMENT(commentId));
+    dispatch(setAlert('Comment Removed', 'success'));
+  } catch (err) {
+    console.error('err', err);
+    dispatch(actions.PROFILE_ERROR({ msg: err.response.statusText, status: err.response.status }));
+  }
+};
